@@ -5,157 +5,1028 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Web Mining - Wahyu Pratama</title>
+    <title>Web Mining | Wahyu Pratama</title>
 
     <style>
 
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f6f8;
-            color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.7;
         }
 
-        header {
-            background-color: #24292f;
-            color: white;
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 8%;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            border-bottom: 1px solid #e2e8f0;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #0f172a;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #475569;
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #2563eb;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 620px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             text-align: center;
-            padding: 40px 20px;
+
+            padding: 80px 20px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #bfdbfe,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    #dbeafe,
+                    transparent 35%
+                ),
+                #f8fafc;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 35px;
+        .hero-content {
+            max-width: 850px;
         }
 
-        header p {
-            margin-top: 10px;
+        .badge {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            margin-bottom: 25px;
+
+            border-radius: 50px;
+
+            background: #dbeafe;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+
+            line-height: 1.1;
+
+            color: #0f172a;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            margin: auto;
+
+            color: #64748b;
+
+            font-size: 18px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: white;
+
+            color: #2563eb;
+
+            border: 1px solid #bfdbfe;
+        }
+
+        .btn-secondary:hover {
+            background: #eff6ff;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           GENERAL SECTION
+        ========================= */
+
+        section {
+            padding: 90px 0;
         }
 
         .container {
-            width: 80%;
-            max-width: 900px;
-            margin: 30px auto;
+            width: 85%;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+        .section-title .small-title {
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            margin-top: 8px;
+
+            font-size: 38px;
+
+            color: #0f172a;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+
+            color: #64748b;
+        }
+
+
+        /* =========================
+           PROFILE
+        ========================= */
+
+        #profile {
+            background: white;
+        }
+
+        .profile-card {
+            display: grid;
+
+            grid-template-columns: 220px 1fr;
+
+            gap: 45px;
+
+            align-items: center;
+
+            padding: 45px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 22px;
+
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.06);
+        }
+
+        .profile-photo {
+            width: 170px;
+            height: 170px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #60a5fa
+                );
+
+            color: white;
+
+            font-size: 52px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 15px 35px rgba(37, 99, 235, 0.25);
+        }
+
+        .profile-info h3 {
+            font-size: 30px;
+
+            color: #0f172a;
+
+            margin-bottom: 15px;
+        }
+
+        .profile-info .description {
+            color: #64748b;
+
+            margin-bottom: 20px;
+        }
+
+        .info-list {
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+
+            gap: 10px;
+
+            color: #475569;
+        }
+
+        .info-item strong {
+            color: #0f172a;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        #materi {
+            background: #f8fafc;
+        }
+
+        .intro-box {
+            padding: 40px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+        }
+
+        .intro-box p {
+            color: #475569;
+
+            text-align: justify;
+
+            margin-bottom: 18px;
+        }
+
+        .intro-box p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* =========================
+           WEB MINING TYPES
+        ========================= */
+
+        .types-section {
+            margin-top: 45px;
+        }
+
+        .types-title {
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            font-size: 25px;
+
+            color: #0f172a;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
         }
 
         .card {
-            background-color: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            border: 1px solid #e2e8f0;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 25px
+                rgba(15, 23, 42, 0.04);
         }
 
-        .card h2 {
-            margin-top: 0;
-            color: #24292f;
+        .card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 18px 40px
+                rgba(15, 23, 42, 0.10);
         }
 
-        .profile p {
-            font-size: 17px;
-            line-height: 1.8;
+        .icon {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 14px;
+
+            background: #dbeafe;
+
+            font-size: 27px;
         }
 
-        .content p {
-            line-height: 1.8;
-            text-align: justify;
+        .card h3 {
+            color: #0f172a;
+
+            margin-bottom: 12px;
+
+            font-size: 20px;
         }
+
+        .card p {
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           CONCLUSION
+        ========================= */
+
+        .conclusion {
+            margin-top: 50px;
+
+            padding: 35px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #dbeafe
+                );
+
+            border-radius: 18px;
+
+            border: 1px solid #bfdbfe;
+        }
+
+        .conclusion h3 {
+            color: #1e40af;
+
+            margin-bottom: 10px;
+        }
+
+        .conclusion p {
+            color: #475569;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
+            padding: 45px 20px;
+
             text-align: center;
-            padding: 20px;
-            background-color: #24292f;
+
+            background: #0f172a;
+
             color: white;
+        }
+
+        footer .footer-logo {
+            font-size: 24px;
+
+            font-weight: 800;
+
+            color: #60a5fa;
+
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #94a3b8;
+
+            font-size: 14px;
+        }
+
+        .copyright {
+            margin-top: 15px;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            nav ul li a {
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 550px;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .profile-card {
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+                padding: 30px;
+            }
+
+            .profile-photo {
+                width: 140px;
+                height: 140px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 90%;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .intro-box {
+                padding: 25px;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <header>
 
-        <h1>WEB MINING</h1>
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-        <p>
-            Website Pembelajaran Web Mining
-        </p>
+    <nav>
 
-    </header>
+        <div class="logo">
+            Web<span>Mining</span>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#home">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="#profile">
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="#materi">
+                    Materi
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
 
 
-    <div class="container">
 
+    <!-- =========================
+         HERO
+    ========================== -->
 
-        <!-- PROFILE -->
+    <section class="hero" id="home">
 
-        <div class="card profile">
+        <div class="hero-content">
 
-            <h2>Profile Anda</h2>
+            <div class="badge">
+                TUGAS 2 • WEB STATIS
+            </div>
+
+            <h1>
+                Mengenal
+                <span>Web Mining</span>
+            </h1>
 
             <p>
-                <b>Nama:</b>
-                Wahyu Pratama
+                Website pembelajaran sederhana untuk memahami
+                konsep dasar, jenis, dan penerapan Web Mining
+                pada World Wide Web.
             </p>
 
-            <p>
-                <b>NPM:</b>
-                230411100058
-            </p>
+            <div class="hero-buttons">
 
-            <p>
-                <b>Email:</b>
-                wahyupritimi@gmail.com
-            </p>
+                <a
+                    href="#materi"
+                    class="btn btn-primary"
+                >
+                    Mulai Belajar ↓
+                </a>
+
+                <a
+                    href="#profile"
+                    class="btn btn-secondary"
+                >
+                    Lihat Profile
+                </a>
+
+            </div>
 
         </div>
 
+    </section>
 
-        <!-- PENGANTAR WEB MINING -->
 
-        <div class="card content">
 
-            <h2>Pengantar Web Mining</h2>
+    <!-- =========================
+         PROFILE
+    ========================== -->
 
-            <p>
-                Web Mining merupakan proses penerapan teknik data mining
-                untuk menemukan informasi dan pola yang bermanfaat dari
-                data yang terdapat di World Wide Web.
-            </p>
+    <section id="profile">
 
-            <p>
-                Perkembangan internet menyebabkan jumlah data yang tersedia
-                di dalam web semakin besar. Data tersebut dapat berupa
-                halaman web, dokumen, gambar, struktur hubungan antarhalaman,
-                maupun aktivitas pengguna.
-            </p>
+        <div class="container">
 
-            <p>
-                Web Mining digunakan untuk mengolah dan menganalisis data
-                tersebut sehingga dapat menghasilkan informasi yang berguna
-                bagi pengguna maupun organisasi.
-            </p>
+            <div class="section-title">
 
-            <p>
-                Secara umum, Web Mining dapat dibagi menjadi tiga jenis,
-                yaitu Web Content Mining, Web Structure Mining, dan
-                Web Usage Mining.
-            </p>
+                <div class="small-title">
+                    Tentang Saya
+                </div>
+
+                <h2>
+                    Profile Mahasiswa
+                </h2>
+
+                <p>
+                    Informasi mahasiswa pada tugas Web Mining
+                </p>
+
+            </div>
+
+
+            <div class="profile-card">
+
+                <div class="profile-photo">
+                    WP
+                </div>
+
+
+                <div class="profile-info">
+
+                    <h3>
+                        Wahyu Pratama
+                    </h3>
+
+                    <p class="description">
+                        Mahasiswa yang sedang mempelajari konsep
+                        Web Mining dan penerapannya dalam pengolahan
+                        data pada World Wide Web.
+                    </p>
+
+
+                    <div class="info-list">
+
+                        <div class="info-item">
+
+                            <strong>
+                                NPM:
+                            </strong>
+
+                            <span>
+                                230411100058
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <strong>
+                                Email:
+                            </strong>
+
+                            <span>
+                                wahyupritim@gmail.com
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <strong>
+                                Mata Kuliah:
+                            </strong>
+
+                            <span>
+                                Web Mining
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
+    </section>
 
-    </div>
 
+
+    <!-- =========================
+         MATERI
+    ========================== -->
+
+    <section id="materi">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="small-title">
+                    Materi Dasar
+                </div>
+
+                <h2>
+                    Pengantar Web Mining
+                </h2>
+
+                <p>
+                    Mengenal konsep dasar Web Mining
+                </p>
+
+            </div>
+
+
+            <div class="intro-box">
+
+                <p>
+
+                    <strong>Web Mining</strong>
+                    merupakan proses penerapan teknik
+                    data mining untuk menemukan informasi,
+                    pola, dan pengetahuan yang bermanfaat
+                    dari data yang terdapat di
+                    World Wide Web.
+
+                </p>
+
+
+                <p>
+
+                    Perkembangan internet menyebabkan jumlah
+                    data yang tersedia di dalam web semakin
+                    besar. Data tersebut dapat berupa teks,
+                    gambar, dokumen, halaman web, hubungan
+                    antarhalaman, maupun aktivitas pengguna.
+
+                </p>
+
+
+                <p>
+
+                    Dengan menggunakan teknik Web Mining,
+                    data yang tersedia di web dapat dikumpulkan,
+                    diolah, dan dianalisis sehingga menghasilkan
+                    informasi yang dapat digunakan untuk berbagai
+                    kebutuhan.
+
+                </p>
+
+
+                <p>
+
+                    Web Mining memiliki berbagai penerapan,
+                    seperti analisis perilaku pengguna,
+                    rekomendasi konten, pencarian informasi,
+                    analisis website, serta pengelompokan
+                    informasi berdasarkan pola tertentu.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 JENIS WEB MINING
+            ========================== -->
+
+            <div class="types-section">
+
+                <h3 class="types-title">
+                    Tiga Jenis Utama Web Mining
+                </h3>
+
+
+                <div class="cards">
+
+
+                    <!-- CONTENT MINING -->
+
+                    <div class="card">
+
+                        <div class="icon">
+                            📄
+                        </div>
+
+                        <h3>
+                            Web Content Mining
+                        </h3>
+
+                        <p>
+
+                            Web Content Mining merupakan proses
+                            menemukan informasi dari isi atau
+                            konten halaman web. Konten tersebut
+                            dapat berupa teks, gambar, video,
+                            dokumen, maupun informasi lainnya.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- STRUCTURE MINING -->
+
+                    <div class="card">
+
+                        <div class="icon">
+                            🔗
+                        </div>
+
+                        <h3>
+                            Web Structure Mining
+                        </h3>
+
+                        <p>
+
+                            Web Structure Mining merupakan proses
+                            menganalisis struktur dan hubungan
+                            antarhalaman web. Salah satu sumber
+                            informasi yang dianalisis adalah
+                            hubungan melalui hyperlink.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- USAGE MINING -->
+
+                    <div class="card">
+
+                        <div class="icon">
+                            📊
+                        </div>
+
+                        <h3>
+                            Web Usage Mining
+                        </h3>
+
+                        <p>
+
+                            Web Usage Mining merupakan proses
+                            menganalisis aktivitas dan pola
+                            perilaku pengguna ketika berinteraksi
+                            dengan sebuah website.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 KESIMPULAN
+            ========================== -->
+
+            <div class="conclusion">
+
+                <h3>
+                    Kesimpulan
+                </h3>
+
+                <p>
+
+                    Web Mining membantu memperoleh informasi
+                    dan pola dari data yang tersedia di World
+                    Wide Web. Secara umum, Web Mining terdiri
+                    dari Web Content Mining, Web Structure Mining,
+                    dan Web Usage Mining. Ketiga pendekatan
+                    tersebut dapat digunakan untuk menghasilkan
+                    informasi yang lebih bermanfaat dari data web.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer>
 
+        <div class="footer-logo">
+            WebMining
+        </div>
+
         <p>
-            © 2026 Web Mining - Wahyu Pratama
+            Website Statis — Tugas Mata Kuliah Web Mining
+        </p>
+
+        <p class="copyright">
+            © 2026 Wahyu Pratama • NPM 230411100058
         </p>
 
     </footer>
+
 
 </body>
 
