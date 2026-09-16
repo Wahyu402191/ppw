@@ -719,8 +719,8 @@
             <!-- Bag of Words -->
             <div class="table-wrapper">
                 <div class="table-header">
-                    <h3>Bag of Words (Word Frequency)</h3>
-                    <p>Frekuensi kemunculan setiap kata unik pada setiap dokumen</p>
+                    <h3>Bag of Words (Word Frequency) - 200 Dokumen x 7,321 Kata Unik</h3>
+                    <p>Frekuensi kemunculan setiap kata unik pada setiap dokumen (diurutkan dari kata paling sering muncul)</p>
                 </div>
                 <div class="table-container" id="bow-table">
                     <div class="loading">
@@ -733,8 +733,8 @@
             <!-- TF-IDF -->
             <div class="table-wrapper">
                 <div class="table-header">
-                    <h3>TF-IDF Matrix</h3>
-                    <p>Representasi dokumen menggunakan TF-IDF (Term Frequency - Inverse Document Frequency)</p>
+                    <h3>TF-IDF Matrix - 200 Dokumen x 2,000 Fitur Terpilih</h3>
+                    <p>Representasi dokumen menggunakan TF-IDF (Term Frequency - Inverse Document Frequency) dengan logarithmic weighting</p>
                 </div>
                 <div class="table-container" id="tfidf-table">
                     <div class="loading">
@@ -747,8 +747,8 @@
             <!-- PCA -->
             <div class="table-wrapper">
                 <div class="table-header">
-                    <h3>PCA (Principal Component Analysis)</h3>
-                    <p>Reduksi dimensi menggunakan PCA untuk mengurangi jumlah fitur</p>
+                    <h3>PCA (Principal Component Analysis) - 200 Dokumen x 50 Komponen</h3>
+                    <p>Reduksi dimensi menggunakan PCA untuk mengurangi 2,000 fitur menjadi 50 komponen (mempertahankan 52.75% variance)</p>
                 </div>
                 <div class="table-container" id="pca-table">
                     <div class="loading">
@@ -814,19 +814,20 @@
             return result;
         }
 
-        // Create table HTML
-        function createTable(headers, data, maxRows = null) {
+        // Create table HTML - TAMPILKAN SEMUA DATA
+        function createTable(headers, data, maxRows = null, maxCols = null) {
             const displayData = maxRows ? data.slice(0, maxRows) : data;
+            const displayHeaders = maxCols ? headers.slice(0, maxCols) : headers;
             
             let html = '<table><thead><tr>';
-            headers.forEach(header => {
+            displayHeaders.forEach(header => {
                 html += `<th>${header}</th>`;
             });
             html += '</tr></thead><tbody>';
             
             displayData.forEach(row => {
                 html += '<tr>';
-                headers.forEach(header => {
+                displayHeaders.forEach(header => {
                     let value = row[header] || '';
                     
                     // Format label
@@ -907,26 +908,25 @@
                 document.getElementById('sport-table').innerHTML = createTable(sportData.headers, sportData.data);
             }
 
-            // Load Bag of Words (limit columns)
+            // Load Bag of Words (TAMPILKAN SEMUA 200 ROWS DAN 2000+ KOLOM)
             const bowData = await loadCSV('output_bow.csv');
             if (bowData) {
-                // Limit to first 50 columns for display
-                const limitedHeaders = bowData.headers.slice(0, 50);
-                document.getElementById('bow-table').innerHTML = createTable(limitedHeaders, bowData.data, 50);
+                // Tampilkan SEMUA data tanpa limit
+                document.getElementById('bow-table').innerHTML = createTable(bowData.headers, bowData.data);
             }
 
-            // Load TF-IDF
+            // Load TF-IDF (TAMPILKAN SEMUA 200 ROWS)
             const tfidfData = await loadCSV('output_tfidf.csv');
             if (tfidfData) {
-                // Limit to first 30 columns for display
-                const limitedHeaders = tfidfData.headers.slice(0, 30);
-                document.getElementById('tfidf-table').innerHTML = createTable(limitedHeaders, tfidfData.data, 50);
+                // Tampilkan SEMUA data
+                document.getElementById('tfidf-table').innerHTML = createTable(tfidfData.headers, tfidfData.data);
             }
 
-            // Load PCA
+            // Load PCA (TAMPILKAN SEMUA 200 ROWS)
             const pcaData = await loadCSV('output_pca.csv');
             if (pcaData) {
-                document.getElementById('pca-table').innerHTML = createTable(pcaData.headers, pcaData.data, 50);
+                // Tampilkan SEMUA data
+                document.getElementById('pca-table').innerHTML = createTable(pcaData.headers, pcaData.data);
             }
         }
 

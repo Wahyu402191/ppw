@@ -46,10 +46,13 @@ for text in df_combined['teks_bersih']:
     words = text.split()
     all_words.extend(words)
 
-# Hitung kata unik
-unique_words = list(set(all_words))
-total_unique_words = len(unique_words)
+# Hitung frekuensi kata di seluruh corpus
+word_freq_corpus = Counter(all_words)
+total_unique_words = len(word_freq_corpus)
 print(f"\nJumlah kata unik sebelum filtering: {total_unique_words}")
+
+# Urutkan kata berdasarkan frekuensi (dari yang paling sering muncul)
+sorted_words = [word for word, freq in word_freq_corpus.most_common()]
 
 # Buat matriks Bag of Words (kata unik)
 print("\nMembuat matriks Bag of Words...")
@@ -64,8 +67,8 @@ for idx, text in enumerate(df_combined['teks_bersih']):
         'dokumen': 'finance' if df_combined.iloc[idx]['label'] == 1 else 'sport'
     }
     
-    # Hitung frekuensi setiap kata unik
-    for word in unique_words:
+    # Hitung frekuensi setiap kata unik (dalam urutan frekuensi)
+    for word in sorted_words:
         row[word] = word_counts.get(word, 0)
     
     row['label'] = df_combined.iloc[idx]['label']

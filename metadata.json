@@ -5,6 +5,6 @@
   "unique_words_before": 7321,
   "unique_words_after": 2000,
   "pca_components": 50,
-  "variance_explained_10": 0.1954966234842682,
-  "variance_explained_all": 0.5263488873897257
+  "variance_explained_10": 0.19549846939737986,
+  "variance_explained_all": 0.5275028953476669
 }
