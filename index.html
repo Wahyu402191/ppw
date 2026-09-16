@@ -4,15 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Web Mining | Wahyu Pratama</title>
+    <title>Text Mining Analysis | Wahyu Pratama</title>
 
     <style>
-
-        /* =========================
-           RESET
-        ========================= */
-
+        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
@@ -21,1013 +16,922 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
-            color: #1e293b;
-            line-height: 1.7;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            color: #1a202c;
+            line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
-        }
-
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
+        /* NAVBAR */
         nav {
             position: sticky;
             top: 0;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            padding: 18px 8%;
-
-            background: rgba(255, 255, 255, 0.95);
-
-            border-bottom: 1px solid #e2e8f0;
-
-            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: #2563eb;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .logo span {
-            color: #0f172a;
-        }
-
-        nav ul {
+        .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 2rem;
             list-style: none;
         }
 
-        nav ul li a {
-            color: #475569;
-            font-size: 15px;
+        .nav-links a {
+            color: #4a5568;
+            text-decoration: none;
             font-weight: 600;
-
-            transition: 0.3s;
+            transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #2563eb;
+        .nav-links a:hover {
+            color: #667eea;
         }
 
-
-        /* =========================
-           HERO
-        ========================= */
-
+        /* HERO SECTION */
         .hero {
-            min-height: 620px;
-
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-
             text-align: center;
-
-            padding: 80px 20px;
-
-            background:
-                radial-gradient(
-                    circle at top right,
-                    #bfdbfe,
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at bottom left,
-                    #dbeafe,
-                    transparent 35%
-                ),
-                #f8fafc;
+            padding: 2rem;
+            color: white;
         }
 
         .hero-content {
-            max-width: 850px;
+            max-width: 900px;
         }
 
-        .badge {
+        .hero-badge {
             display: inline-block;
-
-            padding: 8px 18px;
-
-            margin-bottom: 25px;
-
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50px;
-
-            background: #dbeafe;
-
-            color: #2563eb;
-
-            font-size: 13px;
-
-            font-weight: 800;
-
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
             letter-spacing: 1px;
         }
 
         .hero h1 {
-            font-size: 64px;
-
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
             line-height: 1.1;
-
-            color: #0f172a;
-
-            margin-bottom: 25px;
-        }
-
-        .hero h1 span {
-            color: #2563eb;
         }
 
         .hero p {
-            max-width: 680px;
-
-            margin: auto;
-
-            color: #64748b;
-
-            font-size: 18px;
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
         }
 
-        .hero-buttons {
-            margin-top: 35px;
-
+        .btn-group {
             display: flex;
-
+            gap: 1rem;
             justify-content: center;
-
-            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-
-            padding: 13px 25px;
-
-            border-radius: 9px;
-
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: 700;
-
-            transition: 0.3s;
+            transition: all 0.3s;
+            display: inline-block;
         }
 
         .btn-primary {
-            background: #2563eb;
-            color: white;
-
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
-
             transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
         .btn-secondary {
-            background: white;
-
-            color: #2563eb;
-
-            border: 1px solid #bfdbfe;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
         }
 
         .btn-secondary:hover {
-            background: #eff6ff;
-
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-3px);
         }
 
-
-        /* =========================
-           GENERAL SECTION
-        ========================= */
-
+        /* SECTION */
         section {
-            padding: 90px 0;
+            padding: 5rem 2rem;
         }
 
         .container {
-            width: 85%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-            max-width: 1100px;
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-            margin: auto;
+        .section-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
         }
 
         .section-title {
-            text-align: center;
-
-            margin-bottom: 50px;
-        }
-
-        .section-title .small-title {
-            color: #2563eb;
-
-            font-size: 13px;
-
+            font-size: 2.5rem;
             font-weight: 800;
-
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #1a202c;
         }
 
-        .section-title h2 {
-            margin-top: 8px;
-
-            font-size: 38px;
-
-            color: #0f172a;
+        .section-description {
+            font-size: 1.125rem;
+            color: #718096;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .section-title p {
-            margin-top: 10px;
-
-            color: #64748b;
-        }
-
-
-        /* =========================
-           PROFILE
-        ========================= */
-
-        #profile {
+        /* CARD SECTIONS */
+        .card-section {
             background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        .profile-card {
+        /* PROFILE */
+        .profile-grid {
             display: grid;
-
-            grid-template-columns: 220px 1fr;
-
-            gap: 45px;
-
-            align-items: center;
-
-            padding: 45px;
-
-            background: #f8fafc;
-
-            border: 1px solid #e2e8f0;
-
-            border-radius: 22px;
-
-            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.06);
+            grid-template-columns: 300px 1fr;
+            gap: 0;
         }
 
-        .profile-photo {
-            width: 170px;
-            height: 170px;
-
-            margin: auto;
-
+        .profile-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             display: flex;
-
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 3rem;
+        }
 
+        .avatar-circle {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #60a5fa
-                );
-
-            color: white;
-
-            font-size: 52px;
-
-            font-weight: 800;
-
-            box-shadow:
-                0 15px 35px rgba(37, 99, 235, 0.25);
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            border: 4px solid rgba(255, 255, 255, 0.3);
         }
 
-        .profile-info h3 {
-            font-size: 30px;
-
-            color: #0f172a;
-
-            margin-bottom: 15px;
+        .profile-details {
+            padding: 3rem;
         }
 
-        .profile-info .description {
-            color: #64748b;
-
-            margin-bottom: 20px;
+        .profile-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
         }
 
-        .info-list {
+        .profile-details p {
+            color: #718096;
+            margin-bottom: 2rem;
+        }
+
+        .info-grid {
             display: grid;
-
-            gap: 10px;
+            gap: 1rem;
         }
 
         .info-item {
             display: flex;
-
-            gap: 10px;
-
-            color: #475569;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 10px;
         }
 
         .info-item strong {
-            color: #0f172a;
+            min-width: 150px;
+            color: #4a5568;
         }
 
-
-        /* =========================
-           INTRO
-        ========================= */
-
-        #materi {
-            background: #f8fafc;
+        .info-item span {
+            color: #667eea;
+            font-weight: 600;
         }
 
-        .intro-box {
-            padding: 40px;
-
+        /* CONTENT BOX */
+        .content-box {
             background: white;
-
+            padding: 3rem;
             border-radius: 20px;
-
-            border: 1px solid #e2e8f0;
-
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
         }
 
-        .intro-box p {
-            color: #475569;
-
+        .content-box p {
+            margin-bottom: 1.5rem;
+            color: #4a5568;
             text-align: justify;
-
-            margin-bottom: 18px;
         }
 
-        .intro-box p:last-child {
+        .content-box p:last-child {
             margin-bottom: 0;
         }
 
-
-        /* =========================
-           WEB MINING TYPES
-        ========================= */
-
-        .types-section {
-            margin-top: 45px;
+        .content-box strong {
+            color: #1a202c;
         }
 
-        .types-title {
-            text-align: center;
-
-            margin-bottom: 30px;
-
-            font-size: 25px;
-
-            color: #0f172a;
-        }
-
-        .cards {
+        /* TYPES CARDS */
+        .types-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .card {
+        .type-card {
             background: white;
-
-            padding: 30px;
-
-            border-radius: 18px;
-
-            border: 1px solid #e2e8f0;
-
-            transition: 0.3s;
-
-            box-shadow:
-                0 8px 25px
-                rgba(15, 23, 42, 0.04);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-
-            box-shadow:
-                0 18px 40px
-                rgba(15, 23, 42, 0.10);
+        .type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
-        .icon {
-            width: 60px;
-            height: 60px;
-
+        .type-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
             display: flex;
-
             align-items: center;
             justify-content: center;
-
-            margin-bottom: 20px;
-
-            border-radius: 14px;
-
-            background: #dbeafe;
-
-            font-size: 27px;
-        }
-
-        .card h3 {
-            color: #0f172a;
-
-            margin-bottom: 12px;
-
-            font-size: 20px;
-        }
-
-        .card p {
-            color: #64748b;
-
-            font-size: 15px;
-        }
-
-
-        /* =========================
-           CONCLUSION
-        ========================= */
-
-        .conclusion {
-            margin-top: 50px;
-
-            padding: 35px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eff6ff,
-                    #dbeafe
-                );
-
-            border-radius: 18px;
-
-            border: 1px solid #bfdbfe;
-        }
-
-        .conclusion h3 {
-            color: #1e40af;
-
-            margin-bottom: 10px;
-        }
-
-        .conclusion p {
-            color: #475569;
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            padding: 45px 20px;
-
-            text-align: center;
-
-            background: #0f172a;
-
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
             color: white;
         }
 
+        .type-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .type-card p {
+            color: #718096;
+            line-height: 1.7;
+        }
+
+        /* CONCLUSION */
+        .conclusion-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .conclusion-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .conclusion-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        /* STATISTICS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* TABLE */
+        .table-wrapper {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+
+        .table-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .table-header p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 600px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            background: #f7fafc;
+            z-index: 10;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: #4a5568;
+            border-bottom: 2px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .label-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .label-finance {
+            background: #e0e7ff;
+            color: #5145cd;
+        }
+
+        .label-sport {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        /* LOADING */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #718096;
+        }
+
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
         footer .footer-logo {
-            font-size: 24px;
-
+            font-size: 1.5rem;
             font-weight: 800;
-
-            color: #60a5fa;
-
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
         footer p {
-            color: #94a3b8;
-
-            font-size: 14px;
+            color: #a0aec0;
+            margin-top: 0.5rem;
         }
 
-        .copyright {
-            margin-top: 15px;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 800px) {
-
-            nav {
-                padding: 16px 5%;
-            }
-
-            nav ul {
-                gap: 15px;
-            }
-
-            nav ul li a {
-                font-size: 13px;
-            }
-
-            .hero {
-                min-height: 550px;
-            }
-
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 44px;
+                font-size: 2.5rem;
             }
 
             .hero p {
-                font-size: 16px;
+                font-size: 1rem;
             }
 
-            .profile-card {
-                grid-template-columns: 1fr;
-
-                text-align: center;
-
-                padding: 30px;
-            }
-
-            .profile-photo {
-                width: 140px;
-                height: 140px;
-            }
-
-            .cards {
+            .profile-grid {
                 grid-template-columns: 1fr;
             }
 
-            .container {
-                width: 90%;
+            .nav-links {
+                gap: 1rem;
             }
 
-            section {
-                padding: 65px 0;
+            .section-title {
+                font-size: 2rem;
             }
 
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-
-        @media (max-width: 500px) {
-
-            nav ul {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 38px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .intro-box {
-                padding: 25px;
-            }
-
+        /* BACKGROUND PATTERNS */
+        #profile {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
+        #materi {
+            background: white;
+        }
+
+        #dataset {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- =========================
-         NAVBAR
-    ========================== -->
-
+    <!-- NAVBAR -->
     <nav>
-
-        <div class="logo">
-            Web<span>Mining</span>
+        <div class="nav-container">
+            <div class="logo">TextMining</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#materi">Materi</a></li>
+                <li><a href="#dataset">Dataset</a></li>
+                <li><a href="#analysis">Analysis</a></li>
+            </ul>
         </div>
-
-        <ul>
-
-            <li>
-                <a href="#home">
-                    Home
-                </a>
-            </li>
-
-            <li>
-                <a href="#profile">
-                    Profile
-                </a>
-            </li>
-
-            <li>
-                <a href="#materi">
-                    Materi
-                </a>
-            </li>
-
-        </ul>
-
     </nav>
 
-
-
-    <!-- =========================
-         HERO
-    ========================== -->
-
+    <!-- HERO -->
     <section class="hero" id="home">
-
         <div class="hero-content">
-
-            <div class="badge">
-                TUGAS 2 • WEB STATIS
+            <div class="hero-badge">TEXT MINING & MACHINE LEARNING</div>
+            <h1>Text Mining Analysis</h1>
+            <p>Analisis Preprocessing, TF-IDF, dan PCA pada Dataset Berita Finance dan Sport</p>
+            <div class="btn-group">
+                <a href="#dataset" class="btn btn-primary">Lihat Dataset</a>
+                <a href="#analysis" class="btn btn-secondary">Lihat Analisis</a>
             </div>
-
-            <h1>
-                Mengenal
-                <span>Web Mining</span>
-            </h1>
-
-            <p>
-                Website pembelajaran sederhana untuk memahami
-                konsep dasar, jenis, dan penerapan Web Mining
-                pada World Wide Web.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a
-                    href="#materi"
-                    class="btn btn-primary"
-                >
-                    Mulai Belajar ↓
-                </a>
-
-                <a
-                    href="#profile"
-                    class="btn btn-secondary"
-                >
-                    Lihat Profile
-                </a>
-
-            </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- =========================
-         PROFILE
-    ========================== -->
-
+    <!-- PROFILE -->
     <section id="profile">
-
         <div class="container">
-
-            <div class="section-title">
-
-                <div class="small-title">
-                    Tentang Saya
-                </div>
-
-                <h2>
-                    Profile Mahasiswa
-                </h2>
-
-                <p>
-                    Informasi mahasiswa pada tugas Web Mining
-                </p>
-
+            <div class="section-header">
+                <div class="section-label">TENTANG SAYA</div>
+                <h2 class="section-title">Profile Mahasiswa</h2>
+                <p class="section-description">Informasi mahasiswa pada tugas Text Mining</p>
             </div>
 
-
-            <div class="profile-card">
-
-                <div class="profile-photo">
-                    WP
-                </div>
-
-
-                <div class="profile-info">
-
-                    <h3>
-                        Wahyu Pratama
-                    </h3>
-
-                    <p class="description">
-                        Mahasiswa yang sedang mempelajari konsep
-                        Web Mining dan penerapannya dalam pengolahan
-                        data pada World Wide Web.
-                    </p>
-
-
-                    <div class="info-list">
-
-                        <div class="info-item">
-
-                            <strong>
-                                NPM:
-                            </strong>
-
-                            <span>
-                                230411100058
-                            </span>
-
-                        </div>
-
-
-                        <div class="info-item">
-
-                            <strong>
-                                Email:
-                            </strong>
-
-                            <span>
-                                wahyupritim@gmail.com
-                            </span>
-
-                        </div>
-
-
-                        <div class="info-item">
-
-                            <strong>
-                                Mata Kuliah:
-                            </strong>
-
-                            <span>
-                                Web Mining
-                            </span>
-
-                        </div>
-
+            <div class="card-section">
+                <div class="profile-grid">
+                    <div class="profile-avatar">
+                        <div class="avatar-circle">WP</div>
+                        <h4 style="font-size: 1.25rem;">Wahyu Pratama</h4>
                     </div>
-
+                    <div class="profile-details">
+                        <h3>Wahyu Pratama</h3>
+                        <p>Mahasiswa yang sedang mempelajari konsep Text Mining dan Machine Learning untuk pengolahan dan analisis data teks pada World Wide Web</p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong>NPM</strong>
+                                <span>230411100058</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Email</strong>
+                                <span>wahyupritim@gmail.com</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Mata Kuliah</strong>
+                                <span>Web Mining</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- =========================
-         MATERI
-    ========================== -->
-
+    <!-- MATERI -->
     <section id="materi">
-
         <div class="container">
+            <div class="section-header">
+                <div class="section-label">MATERI DASAR</div>
+                <h2 class="section-title">Pengantar Web Mining</h2>
+                <p class="section-description">Mengenal konsep dasar Web Mining</p>
+            </div>
 
-            <div class="section-title">
+            <div class="content-box">
+                <p><strong>Web Mining</strong> merupakan proses penerapan teknik data mining untuk menemukan informasi, pola, dan pengetahuan yang bermanfaat dari data yang terdapat di World Wide Web.</p>
 
-                <div class="small-title">
-                    Materi Dasar
+                <p>Perkembangan internet menyebabkan jumlah data yang tersedia di dalam web semakin besar. Data tersebut dapat berupa teks, gambar, dokumen, halaman web, hubungan antarhalaman, maupun aktivitas pengguna.</p>
+
+                <p>Dengan menggunakan teknik Web Mining, data yang tersedia di web dapat dikumpulkan, diolah, dan dianalisis sehingga menghasilkan informasi yang dapat digunakan untuk berbagai kebutuhan.</p>
+
+                <p>Web Mining memiliki berbagai penerapan, seperti analisis perilaku pengguna, rekomendasi konten, pencarian informasi, analisis website, serta pengelompokan informasi berdasarkan pola tertentu.</p>
+            </div>
+
+            <div class="types-grid">
+                <div class="type-card">
+                    <div class="type-icon">W</div>
+                    <h3>Web Content Mining</h3>
+                    <p>Web Content Mining merupakan proses menemukan informasi dari isi atau konten halaman web. Konten tersebut dapat berupa teks, gambar, video, dokumen, maupun informasi lainnya.</p>
                 </div>
 
-                <h2>
-                    Pengantar Web Mining
-                </h2>
-
-                <p>
-                    Mengenal konsep dasar Web Mining
-                </p>
-
-            </div>
-
-
-            <div class="intro-box">
-
-                <p>
-
-                    <strong>Web Mining</strong>
-                    merupakan proses penerapan teknik
-                    data mining untuk menemukan informasi,
-                    pola, dan pengetahuan yang bermanfaat
-                    dari data yang terdapat di
-                    World Wide Web.
-
-                </p>
-
-
-                <p>
-
-                    Perkembangan internet menyebabkan jumlah
-                    data yang tersedia di dalam web semakin
-                    besar. Data tersebut dapat berupa teks,
-                    gambar, dokumen, halaman web, hubungan
-                    antarhalaman, maupun aktivitas pengguna.
-
-                </p>
-
-
-                <p>
-
-                    Dengan menggunakan teknik Web Mining,
-                    data yang tersedia di web dapat dikumpulkan,
-                    diolah, dan dianalisis sehingga menghasilkan
-                    informasi yang dapat digunakan untuk berbagai
-                    kebutuhan.
-
-                </p>
-
-
-                <p>
-
-                    Web Mining memiliki berbagai penerapan,
-                    seperti analisis perilaku pengguna,
-                    rekomendasi konten, pencarian informasi,
-                    analisis website, serta pengelompokan
-                    informasi berdasarkan pola tertentu.
-
-                </p>
-
-            </div>
-
-
-
-            <!-- =========================
-                 JENIS WEB MINING
-            ========================== -->
-
-            <div class="types-section">
-
-                <h3 class="types-title">
-                    Tiga Jenis Utama Web Mining
-                </h3>
-
-
-                <div class="cards">
-
-
-                    <!-- CONTENT MINING -->
-
-                    <div class="card">
-
-                        <div class="icon">
-                            📄
-                        </div>
-
-                        <h3>
-                            Web Content Mining
-                        </h3>
-
-                        <p>
-
-                            Web Content Mining merupakan proses
-                            menemukan informasi dari isi atau
-                            konten halaman web. Konten tersebut
-                            dapat berupa teks, gambar, video,
-                            dokumen, maupun informasi lainnya.
-
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- STRUCTURE MINING -->
-
-                    <div class="card">
-
-                        <div class="icon">
-                            🔗
-                        </div>
-
-                        <h3>
-                            Web Structure Mining
-                        </h3>
-
-                        <p>
-
-                            Web Structure Mining merupakan proses
-                            menganalisis struktur dan hubungan
-                            antarhalaman web. Salah satu sumber
-                            informasi yang dianalisis adalah
-                            hubungan melalui hyperlink.
-
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- USAGE MINING -->
-
-                    <div class="card">
-
-                        <div class="icon">
-                            📊
-                        </div>
-
-                        <h3>
-                            Web Usage Mining
-                        </h3>
-
-                        <p>
-
-                            Web Usage Mining merupakan proses
-                            menganalisis aktivitas dan pola
-                            perilaku pengguna ketika berinteraksi
-                            dengan sebuah website.
-
-                        </p>
-
-                    </div>
-
-
+                <div class="type-card">
+                    <div class="type-icon">S</div>
+                    <h3>Web Structure Mining</h3>
+                    <p>Web Structure Mining merupakan proses menganalisis struktur dan hubungan antarhalaman web. Salah satu sumber informasi yang dianalisis adalah hubungan melalui hyperlink.</p>
                 </div>
 
+                <div class="type-card">
+                    <div class="type-icon">U</div>
+                    <h3>Web Usage Mining</h3>
+                    <p>Web Usage Mining merupakan proses menganalisis aktivitas dan pola perilaku pengguna ketika berinteraksi dengan sebuah website.</p>
+                </div>
             </div>
 
-
-
-            <!-- =========================
-                 KESIMPULAN
-            ========================== -->
-
-            <div class="conclusion">
-
-                <h3>
-                    Kesimpulan
-                </h3>
-
-                <p>
-
-                    Web Mining membantu memperoleh informasi
-                    dan pola dari data yang tersedia di World
-                    Wide Web. Secara umum, Web Mining terdiri
-                    dari Web Content Mining, Web Structure Mining,
-                    dan Web Usage Mining. Ketiga pendekatan
-                    tersebut dapat digunakan untuk menghasilkan
-                    informasi yang lebih bermanfaat dari data web.
-
-                </p>
-
+            <div class="conclusion-box">
+                <h3>Kesimpulan</h3>
+                <p>Web Mining membantu memperoleh informasi dan pola dari data yang tersedia di World Wide Web. Secara umum, Web Mining terdiri dari Web Content Mining, Web Structure Mining, dan Web Usage Mining. Ketiga pendekatan tersebut dapat digunakan untuk menghasilkan informasi yang lebih bermanfaat dari data web.</p>
             </div>
-
         </div>
-
     </section>
 
+    <!-- DATASET -->
+    <section id="dataset">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">DATASET</div>
+                <h2 class="section-title">Dataset Berita</h2>
+                <p class="section-description">100 Berita Finance dan 100 Berita Sport</p>
+            </div>
 
+            <div class="stats-grid" id="stats-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Memuat statistik...</p>
+                </div>
+            </div>
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+            <!-- Dataset Finance -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>Dataset Finance (Label 1)</h3>
+                    <p>100 dokumen berita kategori finance</p>
+                </div>
+                <div class="table-container" id="finance-table">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data...</p>
+                    </div>
+                </div>
+            </div>
 
-    <footer>
-
-        <div class="footer-logo">
-            WebMining
+            <!-- Dataset Sport -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>Dataset Sport (Label 2)</h3>
+                    <p>100 dokumen berita kategori sport</p>
+                </div>
+                <div class="table-container" id="sport-table">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data...</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <p>
-            Website Statis — Tugas Mata Kuliah Web Mining
-        </p>
+    <!-- ANALYSIS -->
+    <section id="analysis">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">ANALISIS</div>
+                <h2 class="section-title">Hasil Preprocessing & Analisis</h2>
+                <p class="section-description">Bag of Words, TF-IDF, dan PCA</p>
+            </div>
 
-        <p class="copyright">
-            © 2026 Wahyu Pratama • NPM 230411100058
-        </p>
+            <!-- Bag of Words -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>Bag of Words (Word Frequency)</h3>
+                    <p>Frekuensi kemunculan setiap kata unik pada setiap dokumen</p>
+                </div>
+                <div class="table-container" id="bow-table">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data Bag of Words...</p>
+                    </div>
+                </div>
+            </div>
 
+            <!-- TF-IDF -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>TF-IDF Matrix</h3>
+                    <p>Representasi dokumen menggunakan TF-IDF (Term Frequency - Inverse Document Frequency)</p>
+                </div>
+                <div class="table-container" id="tfidf-table">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data TF-IDF...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PCA -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>PCA (Principal Component Analysis)</h3>
+                    <p>Reduksi dimensi menggunakan PCA untuk mengurangi jumlah fitur</p>
+                </div>
+                <div class="table-container" id="pca-table">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data PCA...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">TextMining</div>
+        <p>Website Text Mining Analysis - Tugas Mata Kuliah Web Mining</p>
+        <p>2026 Wahyu Pratama - NPM 230411100058</p>
     </footer>
 
+    <script>
+        // Load CSV data
+        async function loadCSV(filename) {
+            try {
+                const response = await fetch(filename);
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+                const headers = lines[0].split(',');
+                
+                const data = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const values = parseCSVLine(lines[i]);
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index];
+                    });
+                    data.push(row);
+                }
+                return { headers, data };
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                return null;
+            }
+        }
 
+        // Parse CSV line dengan handling quotes
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        // Create table HTML
+        function createTable(headers, data, maxRows = null) {
+            const displayData = maxRows ? data.slice(0, maxRows) : data;
+            
+            let html = '<table><thead><tr>';
+            headers.forEach(header => {
+                html += `<th>${header}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            displayData.forEach(row => {
+                html += '<tr>';
+                headers.forEach(header => {
+                    let value = row[header] || '';
+                    
+                    // Format label
+                    if (header === 'label') {
+                        if (value == '1') {
+                            value = '<span class="label-badge label-finance">Finance</span>';
+                        } else if (value == '2') {
+                            value = '<span class="label-badge label-sport">Sport</span>';
+                        }
+                    } else if (header === 'dokumen') {
+                        if (value === 'finance') {
+                            value = '<span class="label-badge label-finance">Finance</span>';
+                        } else if (value === 'sport') {
+                            value = '<span class="label-badge label-sport">Sport</span>';
+                        }
+                    }
+                    // Truncate long text
+                    else if (typeof value === 'string' && value.length > 100) {
+                        value = value.substring(0, 100) + '...';
+                    }
+                    // Format numbers
+                    else if (!isNaN(value) && value !== '' && header !== 'ID') {
+                        const num = parseFloat(value);
+                        if (num % 1 !== 0) {
+                            value = num.toFixed(4);
+                        }
+                    }
+                    
+                    html += `<td>${value}</td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            return html;
+        }
+
+        // Load and display all data
+        async function loadAllData() {
+            // Load metadata
+            try {
+                const metaResponse = await fetch('metadata.json');
+                const metadata = await metaResponse.json();
+                
+                // Display stats
+                const statsHTML = `
+                    <div class="stat-card">
+                        <div class="stat-value">${metadata.total_documents}</div>
+                        <div class="stat-label">Total Dokumen</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${metadata.unique_words_before.toLocaleString()}</div>
+                        <div class="stat-label">Kata Unik (Sebelum)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${metadata.unique_words_after.toLocaleString()}</div>
+                        <div class="stat-label">Kata Unik (Setelah)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${metadata.pca_components}</div>
+                        <div class="stat-label">Komponen PCA</div>
+                    </div>
+                `;
+                document.getElementById('stats-container').innerHTML = statsHTML;
+            } catch (error) {
+                console.error('Error loading metadata:', error);
+            }
+
+            // Load Finance dataset
+            const financeData = await loadCSV('detik_finance_100.csv');
+            if (financeData) {
+                document.getElementById('finance-table').innerHTML = createTable(financeData.headers, financeData.data);
+            }
+
+            // Load Sport dataset
+            const sportData = await loadCSV('detik_sport_100.csv');
+            if (sportData) {
+                document.getElementById('sport-table').innerHTML = createTable(sportData.headers, sportData.data);
+            }
+
+            // Load Bag of Words (limit columns)
+            const bowData = await loadCSV('output_bow.csv');
+            if (bowData) {
+                // Limit to first 50 columns for display
+                const limitedHeaders = bowData.headers.slice(0, 50);
+                document.getElementById('bow-table').innerHTML = createTable(limitedHeaders, bowData.data, 50);
+            }
+
+            // Load TF-IDF
+            const tfidfData = await loadCSV('output_tfidf.csv');
+            if (tfidfData) {
+                // Limit to first 30 columns for display
+                const limitedHeaders = tfidfData.headers.slice(0, 30);
+                document.getElementById('tfidf-table').innerHTML = createTable(limitedHeaders, tfidfData.data, 50);
+            }
+
+            // Load PCA
+            const pcaData = await loadCSV('output_pca.csv');
+            if (pcaData) {
+                document.getElementById('pca-table').innerHTML = createTable(pcaData.headers, pcaData.data, 50);
+            }
+        }
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadAllData);
+    </script>
 </body>
-
 </html>
