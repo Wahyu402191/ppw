@@ -722,6 +722,28 @@
                     <h3>Bag of Words (Word Frequency) - 200 Dokumen x 7,321 Kata Unik</h3>
                     <p>Frekuensi kemunculan setiap kata unik pada setiap dokumen (diurutkan dari kata paling sering muncul)</p>
                 </div>
+                
+                <!-- Keterangan BoW -->
+                <div style="background: #fff7ed; padding: 1.5rem 2rem; border-left: 4px solid #fb923c;">
+                    <h4 style="color: #c2410c; margin-bottom: 0.75rem; font-size: 1.1rem;">📊 Penjelasan Bag of Words</h4>
+                    <p style="color: #7c2d12; margin-bottom: 0.75rem; line-height: 1.7;">
+                        <strong>Bag of Words (BoW)</strong> adalah representasi teks yang menghitung frekuensi kemunculan setiap kata dalam dokumen, tanpa memperhatikan urutan kata.
+                    </p>
+                    <ul style="color: #7c2d12; margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Struktur Tabel:</strong> Setiap baris = 1 dokumen, Setiap kolom = 1 kata unik</li>
+                        <li><strong>Nilai:</strong> Angka menunjukkan berapa kali kata tersebut muncul di dokumen</li>
+                        <li><strong>Urutan Kolom:</strong> Kata diurutkan dari yang paling sering muncul di seluruh 200 dokumen</li>
+                        <li><strong>Contoh:</strong> Jika dokumen 1 mengandung kata "bank" sebanyak 5 kali, maka nilai di kolom "bank" adalah 5</li>
+                        <li><strong>Total Data:</strong> 200 dokumen × 7,321 kata unik = 1,464,200 data points</li>
+                    </ul>
+                </div>
+
+                <div style="padding: 1rem 2rem; background: #dbeafe; border-bottom: 2px solid #3b82f6;">
+                    <p style="color: #1e40af; font-weight: 600; margin: 0;">
+                        💡 <strong>Ditampilkan:</strong> 20 dokumen pertama & 50 kata teratas (untuk performa optimal). Data lengkap tersedia di file CSV.
+                    </p>
+                </div>
+
                 <div class="table-container" id="bow-table">
                     <div class="loading">
                         <div class="spinner"></div>
@@ -736,6 +758,30 @@
                     <h3>TF-IDF Matrix - 200 Dokumen x 2,000 Fitur Terpilih</h3>
                     <p>Representasi dokumen menggunakan TF-IDF (Term Frequency - Inverse Document Frequency) dengan logarithmic weighting</p>
                 </div>
+                
+                <!-- Keterangan TF-IDF -->
+                <div style="background: #f0fdf4; padding: 1.5rem 2rem; border-left: 4px solid #4ade80;">
+                    <h4 style="color: #15803d; margin-bottom: 0.75rem; font-size: 1.1rem;">📈 Penjelasan TF-IDF</h4>
+                    <p style="color: #166534; margin-bottom: 0.75rem; line-height: 1.7;">
+                        <strong>TF-IDF</strong> memberikan bobot pada kata berdasarkan tingkat kepentingannya dalam dokumen. Kata yang sering muncul di satu dokumen tapi jarang di dokumen lain mendapat bobot tinggi.
+                    </p>
+                    <ul style="color: #166534; margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Formula:</strong> TF-IDF = TF(t,d) × log(N / df(t))</li>
+                        <li><strong>TF (Term Frequency):</strong> Frekuensi kata dalam dokumen</li>
+                        <li><strong>IDF (Inverse Document Frequency):</strong> log(Total dokumen / Jumlah dokumen yang mengandung kata)</li>
+                        <li><strong>Nilai:</strong> Angka desimal antara 0.0 - 1.0 (menggunakan logarithmic scale)</li>
+                        <li><strong>Filtering:</strong> Dari 7,321 kata dipilih 2,000 kata terbaik (kata yang terlalu umum atau terlalu jarang dihilangkan)</li>
+                        <li><strong>Contoh:</strong> Kata "indonesia" yang muncul sering di 1 dokumen tapi jarang di dokumen lain = nilai TF-IDF tinggi (misal 0.8)</li>
+                        <li><strong>Kegunaan:</strong> Meningkatkan akurasi klasifikasi dan pencarian dokumen</li>
+                    </ul>
+                </div>
+
+                <div style="padding: 1rem 2rem; background: #dbeafe; border-bottom: 2px solid #3b82f6;">
+                    <p style="color: #1e40af; font-weight: 600; margin: 0;">
+                        💡 <strong>Ditampilkan:</strong> 20 dokumen pertama & 30 fitur teratas. Nilai berkisar 0.0-1.0 (semakin tinggi = semakin penting).
+                    </p>
+                </div>
+
                 <div class="table-container" id="tfidf-table">
                     <div class="loading">
                         <div class="spinner"></div>
@@ -750,6 +796,32 @@
                     <h3>PCA (Principal Component Analysis) - 200 Dokumen x 50 Komponen</h3>
                     <p>Reduksi dimensi menggunakan PCA untuk mengurangi 2,000 fitur menjadi 50 komponen (mempertahankan 52.75% variance)</p>
                 </div>
+                
+                <!-- Keterangan PCA -->
+                <div style="background: #faf5ff; padding: 1.5rem 2rem; border-left: 4px solid #a78bfa;">
+                    <h4 style="color: #6b21a8; margin-bottom: 0.75rem; font-size: 1.1rem;">🔄 Penjelasan PCA</h4>
+                    <p style="color: #581c87; margin-bottom: 0.75rem; line-height: 1.7;">
+                        <strong>PCA (Principal Component Analysis)</strong> adalah teknik reduksi dimensi yang mengubah data berdimensi tinggi menjadi dimensi rendah sambil mempertahankan informasi penting.
+                    </p>
+                    <ul style="color: #581c87; margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Input:</strong> 2,000 fitur TF-IDF (dimensi sangat tinggi)</li>
+                        <li><strong>Output:</strong> 50 komponen utama (dimensi lebih rendah)</li>
+                        <li><strong>Variance Retained:</strong> 52.75% informasi dari data original masih tersimpan</li>
+                        <li><strong>Cara Kerja:</strong> Menemukan arah (komponen) dengan variance tertinggi dalam data</li>
+                        <li><strong>PC1 (Principal Component 1):</strong> Komponen dengan variance terbesar</li>
+                        <li><strong>PC2, PC3, dst:</strong> Komponen berikutnya dengan variance menurun</li>
+                        <li><strong>Nilai:</strong> Angka bisa positif atau negatif (menunjukkan posisi dokumen di ruang komponen)</li>
+                        <li><strong>Keuntungan:</strong> Mengurangi kompleksitas, mempercepat training ML, menghilangkan noise dan redundansi</li>
+                        <li><strong>Kegunaan:</strong> Visualisasi data, klasifikasi, clustering, dan mempercepat algoritma machine learning</li>
+                    </ul>
+                </div>
+
+                <div style="padding: 1rem 2rem; background: #dbeafe; border-bottom: 2px solid #3b82f6;">
+                    <p style="color: #1e40af; font-weight: 600; margin: 0;">
+                        💡 <strong>Ditampilkan:</strong> 20 dokumen pertama & semua 50 komponen PCA. Data lengkap (200 dokumen) tersedia di file CSV.
+                    </p>
+                </div>
+
                 <div class="table-container" id="pca-table">
                     <div class="loading">
                         <div class="spinner"></div>
@@ -908,25 +980,34 @@
                 document.getElementById('sport-table').innerHTML = createTable(sportData.headers, sportData.data);
             }
 
-            // Load Bag of Words (TAMPILKAN SEMUA 200 ROWS DAN 2000+ KOLOM)
+            // Load Bag of Words (BATASI 20 ROWS & 50 KOLOM untuk performa)
             const bowData = await loadCSV('output_bow.csv');
             if (bowData) {
-                // Tampilkan SEMUA data tanpa limit
-                document.getElementById('bow-table').innerHTML = createTable(bowData.headers, bowData.data);
+                // Tampilkan hanya 20 dokumen dan 50 kata pertama + label
+                const limitedHeaders = bowData.headers.slice(0, 52); // ID, dokumen, 50 kata
+                if (bowData.headers.includes('label')) {
+                    limitedHeaders.push('label');
+                }
+                document.getElementById('bow-table').innerHTML = createTable(limitedHeaders, bowData.data, 20, limitedHeaders.length);
             }
 
-            // Load TF-IDF (TAMPILKAN SEMUA 200 ROWS)
+            // Load TF-IDF (BATASI 20 ROWS & 30 KOLOM)
             const tfidfData = await loadCSV('output_tfidf.csv');
             if (tfidfData) {
-                // Tampilkan SEMUA data
-                document.getElementById('tfidf-table').innerHTML = createTable(tfidfData.headers, tfidfData.data);
+                // Tampilkan hanya 20 dokumen dan 30 fitur pertama + label
+                const limitedHeaders = tfidfData.headers.slice(0, 32); // ID, dokumen, 30 fitur
+                if (tfidfData.headers.includes('label')) {
+                    limitedHeaders.push('label');
+                }
+                document.getElementById('tfidf-table').innerHTML = createTable(limitedHeaders, tfidfData.data, 20, limitedHeaders.length);
             }
 
-            // Load PCA (TAMPILKAN SEMUA 200 ROWS)
+
+            // Load PCA (BATASI 20 ROWS tapi tampilkan semua 50 komponen)
             const pcaData = await loadCSV('output_pca.csv');
             if (pcaData) {
-                // Tampilkan SEMUA data
-                document.getElementById('pca-table').innerHTML = createTable(pcaData.headers, pcaData.data);
+                // Tampilkan 20 dokumen tapi semua 50 komponen
+                document.getElementById('pca-table').innerHTML = createTable(pcaData.headers, pcaData.data, 20);
             }
         }
 
